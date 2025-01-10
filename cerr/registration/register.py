@@ -52,16 +52,7 @@ def registerScans(basePlanC, baseScanIndex, movPlanC, movScanIndex, transformSav
     warped_img_nii = os.path.join(dirpath, 'warped_moving.nii.gz')
     basePlanC.scan[baseScanIndex].saveNii(fixed_img_nii)
     movPlanC.scan[movScanIndex].saveNii(moving_img_nii)
-    if baseMask3M is not None:
-        basePlanC = pc.importStructureMask(baseMask3M, baseScanIndex, 'mask', basePlanC)
-        maskStrNum = len(basePlanC.structure) - 1
-        pc.saveNiiStructure(fixed_mask_nii, maskStrNum, basePlanC)
-        del basePlanC.structure[-1]
-    if movMask3M is not None:
-        movPlanC = pc.importStructureMask(movMask3M, movScanIndex, 'mask', movPlanC)
-        maskStrNum = len(movPlanC.structure) - 1
-        pc.saveNiiStructure(moving_mask_nii, maskStrNum, movPlanC)
-        del movPlanC.structure[-1]
+
 
     if inputCmdFile is None or not os.path.exists(inputCmdFile):
         if baseMask3M is not None and movMask3M is not None:
